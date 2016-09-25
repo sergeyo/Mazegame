@@ -21,15 +21,6 @@ namespace Mazegame
             createLocations();
         }
 
-        ~HardCodedData()
-        {
-        }
-
-        public virtual void Dispose()
-        {
-        }
-
-
         public Location GetStartingLocation()
         {
             return startUp;
@@ -55,7 +46,7 @@ namespace Mazegame
             lounge.AddExit("north", new Exit("you see a mound of paper to the north", startUp));
 
             startUp.AddExit("west", new Exit("you see a terrifying office to the west", gregsoffice));
-           gregsoffice.AddExit("east", new Exit("you see a mound of paper to the east", startUp));
+            gregsoffice.AddExit("east", new Exit("you see a mound of paper to the east", startUp));
 
             t127.AddExit("south", new Exit("you see a mound of paper to the south", startUp));
             startUp.AddExit("north", new Exit("you see a bleak place to the north", t127));

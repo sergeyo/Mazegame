@@ -15,9 +15,10 @@ namespace Mazegame.Control
 {
     public class DungeonMaster
     {
-        public IMazeClient gameClient;
-        public IMazeData gameData;
-        public Player thePlayer;
+        private IMazeClient gameClient;
+        private IMazeData gameData;
+
+        private GameContext gameContext;
 
         public DungeonMaster(IMazeData gameData, IMazeClient gameClient)
         {
@@ -33,18 +34,23 @@ namespace Mazegame.Control
         public void SetupPlayer()
         {
             String playerName = gameClient.GetReply("What name do you choose to be known by?");
-            thePlayer = new Player(playerName);
-            gameClient.PlayerMessage("Welcome " + playerName + "\n\n");
-            gameClient.PlayerMessage("You find yourself looking at ");
-            gameClient.PlayerMessage(gameData.GetStartingLocation().Description);
 
-            gameClient.GetReply("<<Hit Enter to exit>>");
+            gameContext = new GameContext(gameData.GetStartingLocation(), new Player(playerName));
+
         }
 
         public void RunGame()
         {
             PrintWelcome();
             SetupPlayer();
+
+            gameClient.PlayerMessage("Let the story begins!");
+            gameClient.PlayerMessage("Welcome " + gameContext.Player.Name + "!\n");
+
+            gameClient.PlayerMessage("You find yourself looking at " + gameData.GetStartingLocation().Description);
+
+            gameClient.PlayerMessage("You can use 'help' to see all available commands");
+            gameClient.PlayerMessage("You can use 'help <command>' to see command description");
         }
     } //end DungeonMaster
 } //end namespace Control

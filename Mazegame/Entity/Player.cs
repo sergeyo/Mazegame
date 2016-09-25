@@ -11,7 +11,7 @@ using System;
 namespace Mazegame.Entity {
 	public class Player : Character {
 
-		public Mazegame.Entity.Location m_Location;
+		public Location Location { get; set; }
 
 	    public Player()
 	    {

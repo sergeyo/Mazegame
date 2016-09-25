@@ -28,7 +28,7 @@ namespace Mazegame {
 		/// 
 		/// <param name="message"></param>
 		public void PlayerMessage(String message){
-            Console.Out.Write(message);
+            Console.Out.WriteLine(message);
 		}
 
 	}//end SimpleConsoleClient

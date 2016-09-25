@@ -7,45 +7,29 @@
 ///////////////////////////////////////////////////////////
 
 using System;
-using System.Collections;
+using System.Collections.Generic;
 
 namespace Mazegame.Entity {
 	public class Location
 	{
-	    private Hashtable exits;
-		private String description;
-        private String label;
+	    private Dictionary<string, Exit> exits = new Dictionary<string, Exit>();
 
-	    public Location()
-	    {
-	    }
-
-	    public Location(String description,String label)
+	    public Location(string description,string label)
 		{
 		    Description = description;
 		    Label = label;
-            exits = new Hashtable();
 		}
 
-	    public Boolean AddExit(String exitLabel, Exit theExit)
+	    public void AddExit(string exitLabel, Exit theExit)
 	    {
-	        if (exits.ContainsKey(exitLabel))
-	            return false;
-	        exits.Add(exitLabel,theExit);
-	        return true;
+	        exits[exitLabel] = theExit;
 	    }
 
-		public String Description{
-			get{return description;}
-			set{description = value;}
-		}
+		public string Description{ get; private set; }
 
-	    public String Label
-	    {
-	        get { return label; }
-	        set { label = value; }
-	    }
-	
+	    public string Label { get; private set; }
+
+        IReadOnlyDictionary<string, Exit> Exits { get { return exits; } }
     }//end Location
 
 }//end namespace Entity

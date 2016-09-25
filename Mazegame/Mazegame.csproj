@@ -43,7 +43,14 @@
   <ItemGroup>
     <Compile Include="Boundary\IMazeClient.cs" />
     <Compile Include="Boundary\IMazeData.cs" />
+    <Compile Include="Commands\CommandDispatcher.cs" />
+    <Compile Include="Commands\GotoCommand.cs" />
+    <Compile Include="Commands\HelpCommand.cs" />
+    <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="Commands\ICommandInformationProvider.cs" />
     <Compile Include="Control\DungeonMaster.cs" />
+    <Compile Include="Control\GameContext.cs" />
+    <Compile Include="Control\IGameContext.cs" />
     <Compile Include="Entity\Armor.cs" />
     <Compile Include="Entity\Blacksmith.cs" />
     <Compile Include="Entity\Character.cs" />

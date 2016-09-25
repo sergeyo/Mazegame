@@ -9,7 +9,8 @@
 namespace Mazegame.Entity {
 	public class Shop : Location {
 
-		public Shop(){
+		public Shop(string description, string label) : base(description, label)
+        {
 
 		}
 

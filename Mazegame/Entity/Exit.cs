@@ -11,27 +11,15 @@ using System;
 namespace Mazegame.Entity {
 	public class Exit
 	{
-	    private String description;
-	    private Mazegame.Entity.Location destination;
-
 		public Exit(String description, Location destination)
 		{
 		    Description = description;
 		    Destination = destination;
 		}
 
+	    public string Description { get; private set; }
 
-	    public string Description
-	    {
-	        get { return description; }
-	        set { description = value; }
-	    }
-
-	    public Location Destination
-	    {
-	        get { return destination; }
-	        set { destination = value; }
-	    }
-	}//end Exit
+	    public Location Destination { get; private set; }
+    }//end Exit
 
 }//end namespace Entity

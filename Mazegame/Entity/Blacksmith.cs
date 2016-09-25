@@ -10,7 +10,8 @@
 namespace Mazegame.Entity {
 	public class Blacksmith : Shop {
 
-		public Blacksmith(){
+		public Blacksmith(string description, string label) : base(description, label)
+        {
 
 		}
 

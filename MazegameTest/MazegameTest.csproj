@@ -50,8 +50,16 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="GameContextStub.cs" />
+    <Compile Include="GotoCommandTests.cs" />
+    <Compile Include="HelpCommandTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Mazegame\Mazegame.csproj">
+      <Project>{9e228483-14b2-40a3-8f30-61f7e04db26b}</Project>
+      <Name>Mazegame</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
