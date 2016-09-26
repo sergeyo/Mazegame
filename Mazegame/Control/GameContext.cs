@@ -1,18 +1,24 @@
-﻿using Mazegame.Entity;
+﻿using System;
+using Mazegame.Entity;
 
 namespace Mazegame.Control
 {
     public class GameContext : IGameContext
     {
-        public GameContext(Location currentLocation, Player player)
+        public GameContext(Player player)
         {
-            CurrentLocation = currentLocation;
             Player = player;
         }
 
-        public Location CurrentLocation { get; set; }
-        public Location PreviousLocation { get; set; }
         public Player Player { get; private set; }
+
+        public NonPlayerCharacter CurrentLocationEnemy
+        {
+            get
+            {
+                return null;
+            }
+        }
 
         public bool IsInCombat() { return false; }
     }

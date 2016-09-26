@@ -13,15 +13,20 @@ namespace MazegameTest
     [TestClass]
     public class GotoCommandTests
     {
-        private IGameContext GetContextWith3Locations()
+        private Location startLocation;
+        private Location location1;
+        private Location location2;
+
+        private GameContextStub GetContextWith3Locations()
         {
-            var startLocation = new Location("startLoaction", "start");
-            var location1 = new Location("location1description", "loc1");
-            var location2 = new Location("location2description", "loc2");
+            startLocation = new Location("startLoaction", "start");
+            location1 = new Location("location1description", "loc1");
+            location2 = new Location("location2description", "loc2");
             startLocation.AddExit("exit1", new Exit("exit1description", location1));
             startLocation.AddExit("exit2", new Exit("exit2description", location2));
+            location1.AddExit("location1_exit1", new Exit("location1_exit1description", startLocation));
 
-            return new GameContextStub() { CurrentLocation = startLocation, Player = new Player() { Location = startLocation } };
+            return new GameContextStub() { Player = new Player() { Location = startLocation } };
         }
 
         [TestMethod]
@@ -49,25 +54,79 @@ namespace MazegameTest
         [TestMethod]
         public void GotpCommandExecute_WhenNoArgumentProvided_ShouldReturnExitsList()
         {
-            
-        }
+            var context = GetContextWith3Locations();
+            var command = new GotoCommand();
 
-        [TestMethod]
-        public void GotpCommandExecute_WhenArgumentIsExit1_ShouldChangeLocationToLocation1_AndShowItsDescription()
-        {
+            var response = command.Execute(context, null);
 
-        }
-
-        [TestMethod]
-        public void GotpCommandExecute_WhenArgumentIsExit2_ShouldChangeLocationToLocation2_AndShowItsDescription()
-        {
-
+            Assert.AreEqual(startLocation, context.Player.Location);
+            StringAssert.Contains(response, "You should point an exit to go");
+            StringAssert.Contains(response, "exit1");
+            StringAssert.Contains(response, "exit1description");
+            StringAssert.Contains(response, "exit2");
+            StringAssert.Contains(response, "exit2description");
         }
 
         [TestMethod]
         public void GotpCommandExecute_WhenArgumentIsUnknownExit_ShouldReturnsExitsList()
         {
+            var context = GetContextWith3Locations();
+            var command = new GotoCommand();
 
+            var response = command.Execute(context, "unknownExit");
+
+            Assert.AreEqual(startLocation, context.Player.Location);
+            StringAssert.Contains(response, "unknown exit");
+            StringAssert.Contains(response, "exit1");
+            StringAssert.Contains(response, "exit1description");
+            StringAssert.Contains(response, "exit2");
+            StringAssert.Contains(response, "exit2description");
+
+        }
+
+        [TestMethod]
+        public void GotpCommandExecute_WhenArgumentIsExit1_ShouldChangeLocationToLocation1_AndShowItsDescription()
+        {
+            var context = GetContextWith3Locations();
+            var command = new GotoCommand();
+
+            var response = command.Execute(context, "exit1");
+
+            Assert.AreEqual(location1, context.Player.Location);
+            Assert.AreEqual(startLocation, context.Player.PreviousLocation);
+            StringAssert.Contains(response, location1.Description);
+            StringAssert.Contains(response, "location1_exit1description");
+        }
+
+        [TestMethod]
+        public void GotpCommandExecute_WhenArgumentIsExit2_ShouldChangeLocationToLocation2_AndShowItsDescription()
+        {
+            var context = GetContextWith3Locations();
+            var command = new GotoCommand();
+
+            var response = command.Execute(context, "exit2");
+
+            Assert.AreEqual(location2, context.Player.Location);
+            Assert.AreEqual(startLocation, context.Player.PreviousLocation);
+            StringAssert.Contains(response, location2.Description);
+        }
+
+        [TestMethod]
+        public void GotpCommandExecute_WhenArgumentIsExit1AndEnteredCombatMode_ShouldChangeLocationToLocation2_AndShowEnemyName()
+        {
+            var context = GetContextWith3Locations();
+            context.IsInCombatMode = true;
+            context.CurrentLocationEnemy = new NonPlayerCharacter() { Name = "enemy1" };
+
+            var command = new GotoCommand();
+
+            var response = command.Execute(context, "exit1");
+
+            Assert.AreEqual(location1, context.Player.Location);
+            Assert.AreEqual(startLocation, context.Player.PreviousLocation);
+            Assert.IsFalse(response.Contains("location1_exit1description"));
+            StringAssert.Contains(response, "You have spotted an enemy");
+            StringAssert.Contains(response, context.CurrentLocationEnemy.Name);
         }
     }
 }

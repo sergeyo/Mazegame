@@ -7,13 +7,18 @@
 ///////////////////////////////////////////////////////////
 
 using System;
+using System.Collections.Generic;
 
 namespace Mazegame.Entity {
 	public class Player : Character {
 
 		public Location Location { get; set; }
 
-	    public Player()
+        public Location PreviousLocation { get; set; }
+
+        public List<Item> Backpack { get; set; }
+
+        public Player()
 	    {
 	    }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mazegame.Control;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,16 +17,28 @@ namespace Mazegame.Commands
                 new GotoCommand(),
                 new HelpCommand(this)
             };
+
+            commands = availableCommands.ToDictionary(c => c.Name);
         }
 
-        public IEnumerable<string> GetCommandsList()
+        IEnumerable<string> ICommandInformationProvider.GetCommandsList()
         {
             return commands.Keys;
         }
 
-        public string GetCommandUsage(string command)
+        string ICommandInformationProvider.GetCommandUsage(string command)
         {
             return commands[command].Usage;
+        }
+
+        public string Execute(IGameContext context, string command, string argument)
+        {
+            if (!commands.ContainsKey(command))
+            {
+                return "Unknown command. Use 'help' to see known commands list.";
+            }
+
+            return commands[command].Execute(context, argument);
         }
     }
 }

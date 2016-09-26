@@ -29,7 +29,7 @@ namespace Mazegame.Entity {
 
 	    public string Label { get; private set; }
 
-        IReadOnlyDictionary<string, Exit> Exits { get { return exits; } }
+        public IReadOnlyDictionary<string, Exit> Exits { get { return exits; } }
     }//end Location
 
 }//end namespace Entity

@@ -10,6 +10,8 @@
 using System;
 using Mazegame.Boundary;
 using Mazegame.Entity;
+using Mazegame.Commands;
+using System.Linq;
 
 namespace Mazegame.Control
 {
@@ -35,8 +37,9 @@ namespace Mazegame.Control
         {
             String playerName = gameClient.GetReply("What name do you choose to be known by?");
 
-            gameContext = new GameContext(gameData.GetStartingLocation(), new Player(playerName));
+            var player = new Player(playerName) { Location = gameData.GetStartingLocation() };
 
+            gameContext = new GameContext(player);
         }
 
         public void RunGame()
@@ -51,6 +54,37 @@ namespace Mazegame.Control
 
             gameClient.PlayerMessage("You can use 'help' to see all available commands");
             gameClient.PlayerMessage("You can use 'help <command>' to see command description");
+
+            var dispatcher = new CommandDispatcher();
+
+            while (true)
+            {
+                var userInput = gameClient.GetReply(">");
+                if (string.IsNullOrWhiteSpace(userInput))
+                {
+                    gameClient.PlayerMessage("Please enter some command");
+                    gameClient.PlayerMessage("You can use 'help' to see all available commands");
+                    gameClient.PlayerMessage("You can use 'help <command>' to see command description");
+                    continue;
+                }
+
+                var userInputItems = userInput.Split(new[] { ' ' },  StringSplitOptions.RemoveEmptyEntries);
+                if (userInputItems.Length > 2)
+                {
+                    gameClient.PlayerMessage("You have entered too many words, you can enter command or command and its argument");
+                    continue;
+                }
+
+                var commandName = userInputItems[0];
+                var arguments = userInputItems.Skip(1);
+
+                if (commandName == "quit") break;
+
+                gameClient.PlayerMessage(dispatcher.Execute(gameContext, commandName, arguments.FirstOrDefault()));
+            }
+
+            gameClient.PlayerMessage("Game over!");
+            gameClient.PlayerMessage("Good bye!");
         }
     } //end DungeonMaster
 } //end namespace Control
