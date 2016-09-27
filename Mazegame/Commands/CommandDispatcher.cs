@@ -1,4 +1,5 @@
-﻿using Mazegame.Control;
+﻿using Mazegame.Commands.ItemCommands;
+using Mazegame.Control;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +15,11 @@ namespace Mazegame.Commands
         public CommandDispatcher()
         {
             var availableCommands = new ICommand[] {
+                new HelpCommand(this),
                 new GotoCommand(),
-                new HelpCommand(this)
+                new ListItemsCommand(),
+                new EquipItemCommand(),
+                new UnequipItemCommand()
             };
 
             commands = availableCommands.ToDictionary(c => c.Name);

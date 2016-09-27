@@ -12,17 +12,12 @@ namespace Mazegame.Entity
 {
     public class NonPlayerCharacter : Character
     {
-        private Boolean hostile;
-
-        public NonPlayerCharacter()
+        public NonPlayerCharacter(string name, int agility, int lifePoints, int strength, bool hostile)
+            : base(name, agility, lifePoints, strength)
         {
+            Hostile = hostile;
         }
 
-
-        public Boolean Hostile
-        {
-            get { return hostile; }
-            set { hostile = value; }
-        }
-    } //end NonPlayerCharacter
-} //end namespace Entity
+        public Boolean Hostile { get; private set; }
+    }
+}

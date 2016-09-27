@@ -12,48 +12,24 @@ namespace Mazegame.Entity
 {
     public class Character
     {
-        private int agility;
-        private int lifePoints;
-        private String name;
-        private int strength;
-        public Mazegame.Entity.Dice m_Dice;
-        public Mazegame.Entity.Party m_Party;
-        public Mazegame.Entity.Item m_Item;
-        public Mazegame.Entity.Shield m_Shield;
-        public Mazegame.Entity.Weapon m_Weapon;
-        public Mazegame.Entity.Armor m_Armor;
+        public Dice Dice { get; set; }
+        public Party Party { get; set; }
+        public Item Item { get; set; }
+        public Shield Shield { get; set; }
+        public Weapon Weapon { get; set; }
+        public Armor Armor { get; set; }
 
-        public Character()
-        {
-        }
-
-        public Character(String name)
+        public Character(String name, int agility, int lifePoints, int strength)
         {
             Name = name;
+            Agility = agility;
+            LifePoints = lifePoints;
+            Strength = strength;
         }
 
-        public int Agility
-        {
-            get { return agility; }
-            set { agility = value; }
-        }
-
-        public int LifePoints
-        {
-            get { return lifePoints; }
-            set { lifePoints = value; }
-        }
-
-        public String Name
-        {
-            get { return name; }
-            set { name = value; }
-        }
-
-        public int Strength
-        {
-            get { return strength; }
-            set { strength = value; }
-        }
+        public int Agility { get; private set; }
+        public int LifePoints { get; private set; }
+        public String Name { get; private set; }
+        public int Strength { get; private set; }
     } //end Character
 } //end namespace Entity

@@ -6,27 +6,21 @@
 //  Original author: Gsimmons
 ///////////////////////////////////////////////////////////
 
-using System;
 using System.Collections.Generic;
 
 namespace Mazegame.Entity {
 	public class Player : Character {
 
 		public Location Location { get; set; }
-
         public Location PreviousLocation { get; set; }
 
         public List<Item> Backpack { get; set; }
+        public int MaxWeight => Strength * 2;
 
-        public Player()
-	    {
-	    }
-
-	    public Player(String name) : base(name)
-		{
-		    
+        public Player(string name, int agility, int lifePoints, int strength) 
+            : base(name, agility, lifePoints, strength)
+        {
+            Backpack = new List<Item>();   
 		}
-
-	}//end Player
-
-}//end namespace Entity
+	}
+}

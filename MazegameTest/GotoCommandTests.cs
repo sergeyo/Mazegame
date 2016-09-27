@@ -26,7 +26,7 @@ namespace MazegameTest
             startLocation.AddExit("exit2", new Exit("exit2description", location2));
             location1.AddExit("location1_exit1", new Exit("location1_exit1description", startLocation));
 
-            return new GameContextStub() { Player = new Player() { Location = startLocation } };
+            return new GameContextStub() { Player = new Player("", 10, 10, 10) { Location = startLocation } };
         }
 
         [TestMethod]
@@ -52,7 +52,7 @@ namespace MazegameTest
         }
 
         [TestMethod]
-        public void GotpCommandExecute_WhenNoArgumentProvided_ShouldReturnExitsList()
+        public void GotoCommandExecute_WhenNoArgumentProvided_ShouldReturnExitsList()
         {
             var context = GetContextWith3Locations();
             var command = new GotoCommand();
@@ -68,7 +68,7 @@ namespace MazegameTest
         }
 
         [TestMethod]
-        public void GotpCommandExecute_WhenArgumentIsUnknownExit_ShouldReturnsExitsList()
+        public void GotoCommandExecute_WhenArgumentIsUnknownExit_ShouldReturnsExitsList()
         {
             var context = GetContextWith3Locations();
             var command = new GotoCommand();
@@ -85,7 +85,7 @@ namespace MazegameTest
         }
 
         [TestMethod]
-        public void GotpCommandExecute_WhenArgumentIsExit1_ShouldChangeLocationToLocation1_AndShowItsDescription()
+        public void GotoCommandExecute_WhenArgumentIsExit1_ShouldChangeLocationToLocation1_AndShowItsDescription()
         {
             var context = GetContextWith3Locations();
             var command = new GotoCommand();
@@ -99,7 +99,7 @@ namespace MazegameTest
         }
 
         [TestMethod]
-        public void GotpCommandExecute_WhenArgumentIsExit2_ShouldChangeLocationToLocation2_AndShowItsDescription()
+        public void GotoCommandExecute_WhenArgumentIsExit2_ShouldChangeLocationToLocation2_AndShowItsDescription()
         {
             var context = GetContextWith3Locations();
             var command = new GotoCommand();
@@ -112,11 +112,11 @@ namespace MazegameTest
         }
 
         [TestMethod]
-        public void GotpCommandExecute_WhenArgumentIsExit1AndEnteredCombatMode_ShouldChangeLocationToLocation2_AndShowEnemyName()
+        public void GotoCommandExecute_WhenArgumentIsExit1AndEnteredCombatMode_ShouldChangeLocationToLocation2_AndShowEnemyName()
         {
             var context = GetContextWith3Locations();
             context.IsInCombatMode = true;
-            context.CurrentLocationEnemy = new NonPlayerCharacter() { Name = "enemy1" };
+            context.CurrentLocationEnemy = new NonPlayerCharacter("", 10, 10, 10, true);
 
             var command = new GotoCommand();
 

@@ -48,6 +48,9 @@
     <Compile Include="Commands\HelpCommand.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\ICommandInformationProvider.cs" />
+    <Compile Include="Commands\ItemCommands\EquipItemCommand.cs" />
+    <Compile Include="Commands\ItemCommands\ListItemsCommand.cs" />
+    <Compile Include="Commands\ItemCommands\UnequipItemCommand.cs" />
     <Compile Include="Control\DungeonMaster.cs" />
     <Compile Include="Control\GameContext.cs" />
     <Compile Include="Control\IGameContext.cs" />
