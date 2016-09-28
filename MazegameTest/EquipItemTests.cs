@@ -12,8 +12,6 @@ namespace MazegameTest
     [TestClass]
     public class EquipItemTests
     {
-        class NonWearableItem : Item { }
-
         private Weapon weapon = new Weapon() { Description = "weapon" };
         private Weapon weapon2 = new Weapon() { Description = "weapon2" };
         private Armor armor = new Armor() { Description = "armor" };

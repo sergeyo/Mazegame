@@ -35,5 +35,14 @@ namespace Mazegame.Entity
             set { description = value; }
         }
 
+        /// <summary>
+        /// Equip player with item
+        /// </summary>
+        /// <param name="player"></param>
+        /// <returns>Returns false if item can't be weared</returns>
+        public virtual bool Equip(Player player)
+        {
+            return false;
+        }
     } //end Item
 } //end namespace Entity

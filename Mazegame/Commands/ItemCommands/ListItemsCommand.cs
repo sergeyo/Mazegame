@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Mazegame.Control;
+using Mazegame.Entity;
 
 namespace Mazegame.Commands.ItemCommands
 {
@@ -14,18 +15,37 @@ namespace Mazegame.Commands.ItemCommands
 
         public string Execute(IGameContext context, string argument)
         {
+            var sb = new StringBuilder();
+
+            var player = context.Player;
+
+            var equippedItems = new Item[] {
+                    player.Weapon,
+                    player.Armor,
+                    player.Shield
+                }.Where(item => item != null)
+                 .ToList();
+            if (equippedItems.Any()) {
+                sb.AppendLine("You are equipped with:");
+                sb.AppendLine(equippedItems.GetItemsListWithWeights());
+            } else
+            {
+                sb.AppendLine("You have no equipped items.");
+            }
+
             if (context.Player.Backpack.Any())
             {
-                return string.Format("Here is your backpack content (weight: {0}/{1}):\n{2}",
-                    context.Player.Backpack.Sum(item => item.Weight),
-                    context.Player.MaxWeight,
-                    string.Join("\n", context.Player.Backpack.Select(item => $"{item.Description} (weight {item.Weight})" ))
-                );
+                sb.AppendLine(string.Format("Here is your backpack content (weight: {0}/{1}):\n{2}",
+                    player.GetCurrentWeight(),
+                    player.MaxWeight,
+                    sb.AppendLine(context.Player.Backpack.GetItemsListWithWeights())
+                ));
             }
             else
             {
-                return "Your backpack is empty.";
+                sb.AppendLine("Your backpack is empty.");
             }
+            return sb.ToString();
         }
 
         public bool IsAvailableInContext(IGameContext context)

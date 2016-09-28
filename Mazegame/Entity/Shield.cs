@@ -7,13 +7,18 @@
 ///////////////////////////////////////////////////////////
 
 namespace Mazegame.Entity {
-	public class Shield : Armor {
+	public class Shield : Item {
 
 		public Shield(){
+        }
 
-		}
+        public int Bonus { get; set; }
 
-
-	}//end Shield
+        public override bool Equip(Player player)
+        {
+            player.Equip(this);
+            return true;
+        }
+    }//end Shield
 
 }//end namespace Entity

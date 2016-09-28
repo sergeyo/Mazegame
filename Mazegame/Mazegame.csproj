@@ -48,7 +48,9 @@
     <Compile Include="Commands\HelpCommand.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\ICommandInformationProvider.cs" />
+    <Compile Include="Commands\ItemCommands\DropItemCommand.cs" />
     <Compile Include="Commands\ItemCommands\EquipItemCommand.cs" />
+    <Compile Include="Commands\ItemCommands\GetItemCommand.cs" />
     <Compile Include="Commands\ItemCommands\ListItemsCommand.cs" />
     <Compile Include="Commands\ItemCommands\UnequipItemCommand.cs" />
     <Compile Include="Control\DungeonMaster.cs" />
@@ -60,6 +62,7 @@
     <Compile Include="Entity\Dice.cs" />
     <Compile Include="Entity\Exit.cs" />
     <Compile Include="Entity\Item.cs" />
+    <Compile Include="Entity\ItemsEnumerableExtensions.cs" />
     <Compile Include="Entity\Location.cs" />
     <Compile Include="Entity\Maze.cs" />
     <Compile Include="Entity\NonPlayerCharacter.cs" />

@@ -31,5 +31,7 @@ namespace Mazegame.Entity
         public int LifePoints { get; private set; }
         public String Name { get; private set; }
         public int Strength { get; private set; }
+
+
     } //end Character
 } //end namespace Entity

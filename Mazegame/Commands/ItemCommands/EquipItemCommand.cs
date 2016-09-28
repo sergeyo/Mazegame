@@ -15,63 +15,33 @@ namespace Mazegame.Commands.ItemCommands
 
         public string Execute(IGameContext context, string argument)
         {
+            var backpack = context.Player.Backpack;
+
             if (string.IsNullOrWhiteSpace(argument))
             {
-                return "You should specify item number to equip:\n" + GetBackpackItemsList(context.Player.Backpack);
+                return "You should specify item number to equip:\n" + backpack.GetItemsIndexedList();
             }
 
             int itemNumber;
             if (!int.TryParse(argument, out itemNumber))
             {
-                return "You should specify correct item number to equip:\n" + GetBackpackItemsList(context.Player.Backpack);
+                return "You should specify correct item number to equip:\n" + backpack.GetItemsIndexedList();
             }
 
-            if (itemNumber < 0 || itemNumber > context.Player.Backpack.Count) {
-                return "You should specify correct item number to equip:\n" + GetBackpackItemsList(context.Player.Backpack);
+            if (itemNumber < 0 || itemNumber > backpack.Count) {
+                return "You should specify correct item number to equip:\n" + backpack.GetItemsIndexedList();
             }
 
-            var item = context.Player.Backpack[itemNumber];
+            var item = backpack[itemNumber];
 
-            if (item is Shield)
+            if (item.Equip(context.Player))
             {
-                if (context.Player.Shield != null)
-                {
-                    context.Player.Backpack.Add(context.Player.Shield);
-                }
-                context.Player.Shield = (Shield)item;
+                return "Now you are equipped with " + item.Description;
             }
-            else {
-                if (item is Armor)
-                {
-                    if (context.Player.Armor != null)
-                    {
-                        context.Player.Backpack.Add(context.Player.Armor);
-                    }
-                    context.Player.Armor = (Armor)item;
-                }
-                else
-                {
-                    if (item is Weapon)
-                    {
-                        if (context.Player.Weapon != null)
-                        {
-                            context.Player.Backpack.Add(context.Player.Weapon);
-                        }
-                        context.Player.Weapon = (Weapon)item;
-                    }
-                    else
-                    {
-                        return "This item cannot be equipped";
-                    }
-                } 
+            else
+            {
+                return "This item cannot be equipped";
             }
-            context.Player.Backpack.Remove(item);
-
-            return "Now you are equipped with " + item.Description;
-        }
-
-        private string GetBackpackItemsList(IEnumerable<Item> items) {
-            return string.Join("\n", items.Select((item, index) => string.Format("{0}: {1}", index, item.Description)));
         }
 
         public bool IsAvailableInContext(IGameContext context)

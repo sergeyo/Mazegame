@@ -14,10 +14,11 @@ namespace Mazegame.Entity {
 	{
 	    private Dictionary<string, Exit> exits = new Dictionary<string, Exit>();
 
-	    public Location(string description,string label)
+	    public Location(string description, string label)
 		{
 		    Description = description;
 		    Label = label;
+            CollectableItems = new List<Item>();
 		}
 
 	    public void AddExit(string exitLabel, Exit theExit)
@@ -30,6 +31,7 @@ namespace Mazegame.Entity {
 	    public string Label { get; private set; }
 
         public IReadOnlyDictionary<string, Exit> Exits { get { return exits; } }
-    }//end Location
 
-}//end namespace Entity
+        public List<Item> CollectableItems { get; set; }
+    }
+}

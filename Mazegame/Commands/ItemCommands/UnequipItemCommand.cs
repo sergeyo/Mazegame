@@ -21,7 +21,7 @@ namespace Mazegame.Commands.ItemCommands
                     if (player.Weapon == null) {
                         return "You have no " + argument + " equipped.";
                     }
-                    player.Backpack.Add(player.Weapon);
+                    player.AddItemToBackpack(player.Weapon);
                     player.Weapon = null;
                     return "You have unequiped " + argument;
                 case "armor":
@@ -29,7 +29,7 @@ namespace Mazegame.Commands.ItemCommands
                     {
                         return "You have no " + argument + " equipped.";
                     }
-                    player.Backpack.Add(player.Armor);
+                    player.AddItemToBackpack(player.Armor);
                     player.Armor = null;
                     return "You have unequiped " + argument;
                 case "shield":
@@ -37,7 +37,7 @@ namespace Mazegame.Commands.ItemCommands
                     {
                         return "You have no " + argument + " equipped.";
                     }
-                    player.Backpack.Add(player.Shield);
+                    player.AddItemToBackpack(player.Shield);
                     player.Shield = null;
                     return "You have unequiped " + argument;
                 default:

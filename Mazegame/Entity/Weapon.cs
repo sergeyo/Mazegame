@@ -15,6 +15,11 @@ namespace Mazegame.Entity {
 
 		}
 
-	}//end Weapon
+        public override bool Equip(Player player)
+        {
+            player.Equip(this);
+            return true;
+        }
+    }//end Weapon
 
 }//end namespace Entity

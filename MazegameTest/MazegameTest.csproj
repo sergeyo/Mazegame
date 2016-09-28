@@ -50,11 +50,14 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="DropItemCommandTests.cs" />
     <Compile Include="EquipItemTests.cs" />
     <Compile Include="GameContextStub.cs" />
+    <Compile Include="GetItemCommandTests.cs" />
     <Compile Include="GotoCommandTests.cs" />
     <Compile Include="HelpCommandTests.cs" />
     <Compile Include="ListItemsCommandTests.cs" />
+    <Compile Include="NonWearableItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnequipItemCommandTests.cs" />
   </ItemGroup>

@@ -10,17 +10,16 @@ namespace Mazegame.Entity
 {
     public class Armor : Item
     {
-        private int bonus;
-
         public Armor()
         {
         }
 
+        public int Bonus { get; set; }
 
-        public int Bonus
+        public override bool Equip(Player player)
         {
-            get { return bonus; }
-            set { bonus = value; }
+            player.Equip(this);
+            return true;
         }
     } //end Armor
 } //end namespace Entity

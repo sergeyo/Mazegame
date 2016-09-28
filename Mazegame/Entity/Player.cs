@@ -6,7 +6,9 @@
 //  Original author: Gsimmons
 ///////////////////////////////////////////////////////////
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Mazegame.Entity {
 	public class Player : Character {
@@ -22,5 +24,63 @@ namespace Mazegame.Entity {
         {
             Backpack = new List<Item>();   
 		}
-	}
+
+        public int GetCurrentWeight()
+        {
+            var equippedItems = new Item[] {
+                    Weapon,
+                    Armor,
+                    Shield
+                }.Where(item => item != null)
+                 .ToList();
+
+            equippedItems.AddRange(Backpack);
+
+            return equippedItems.Sum(item => item.Weight);
+        }
+
+        public void Equip(Weapon weapon)
+        {
+            if (Backpack.Contains(weapon))
+            {
+                Backpack.Remove(weapon);
+            }
+            if (Weapon != null)
+            {
+                AddItemToBackpack(Weapon);
+            }
+            Weapon = weapon;
+        }
+
+        public void Equip(Armor armor)
+        {
+            if (Backpack.Contains(armor))
+            {
+                Backpack.Remove(armor);
+            }
+            if (Armor != null)
+            {
+                AddItemToBackpack(Armor);
+            }
+            Armor = armor;
+        }
+
+        public void Equip(Shield shield)
+        {
+            if (Backpack.Contains(shield))
+            {
+                Backpack.Remove(shield);
+            }
+            if (Shield != null)
+            {
+                AddItemToBackpack(Shield);
+            }
+            Shield = shield;
+        }
+
+        public void AddItemToBackpack(Item item)
+        {
+            Backpack.Add(item);
+        }
+    }
 }
