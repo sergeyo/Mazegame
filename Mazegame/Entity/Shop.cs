@@ -6,15 +6,16 @@
 //  Original author: Gsimmons
 ///////////////////////////////////////////////////////////
 
+using System.Collections.Generic;
+
 namespace Mazegame.Entity {
 	public class Shop : Location {
 
 		public Shop(string description, string label) : base(description, label)
         {
-
+            Store = new List<Item>();
 		}
 
-
-	}//end Shop
-
-}//end namespace Entity
+        public List<Item> Store { get; set; }
+	}
+}

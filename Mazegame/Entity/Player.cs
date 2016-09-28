@@ -19,6 +19,8 @@ namespace Mazegame.Entity {
         public List<Item> Backpack { get; set; }
         public int MaxWeight => Strength * 2;
 
+        public int Gold { get; set; }
+
         public Player(string name, int agility, int lifePoints, int strength) 
             : base(name, agility, lifePoints, strength)
         {

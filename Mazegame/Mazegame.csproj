@@ -52,6 +52,7 @@
     <Compile Include="Commands\ItemCommands\EquipItemCommand.cs" />
     <Compile Include="Commands\ItemCommands\GetItemCommand.cs" />
     <Compile Include="Commands\ItemCommands\ListItemsCommand.cs" />
+    <Compile Include="Commands\ItemCommands\PurchaseItemCommand.cs" />
     <Compile Include="Commands\ItemCommands\UnequipItemCommand.cs" />
     <Compile Include="Control\DungeonMaster.cs" />
     <Compile Include="Control\GameContext.cs" />
