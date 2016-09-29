@@ -44,6 +44,7 @@
     <Compile Include="Boundary\IMazeClient.cs" />
     <Compile Include="Boundary\IMazeData.cs" />
     <Compile Include="Commands\CommandDispatcher.cs" />
+    <Compile Include="Commands\FightCommand.cs" />
     <Compile Include="Commands\GotoCommand.cs" />
     <Compile Include="Commands\HelpCommand.cs" />
     <Compile Include="Commands\ICommand.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="Commands\ItemCommands\PurchaseItemCommand.cs" />
     <Compile Include="Commands\ItemCommands\SellItemCommand.cs" />
     <Compile Include="Commands\ItemCommands\UnequipItemCommand.cs" />
+    <Compile Include="Commands\RunawayCommand.cs" />
     <Compile Include="Control\DungeonMaster.cs" />
     <Compile Include="Control\GameContext.cs" />
     <Compile Include="Control\IGameContext.cs" />

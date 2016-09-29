@@ -9,11 +9,20 @@
 namespace Mazegame.Entity {
 	public class Weapon : Item {
 
-		public Mazegame.Entity.Dice m_Dice;
+		public Dice Dice { get; set; }
 
-		public Weapon(){
+		public Weapon() {
 
 		}
+
+        public override string Description {
+            get {
+                return base.Description + $" (Dmg {Dice?.ToString()})";
+            }
+            set {
+                base.Description = value;
+            }
+        }
 
         public override bool Equip(Player player)
         {

@@ -7,27 +7,31 @@
 ///////////////////////////////////////////////////////////
 
 
+using System;
+using System.Linq;
+
 namespace Mazegame.Entity
 {
     public class Dice
     {
-        private int rolls;
-        private int sides;
-
-        public Dice()
+        public Dice(int rolls, int sides)
         {
+            Rolls = rolls;
+            Sides = sides;
         }
 
-        public int Rolls
+        public int Rolls { get; private set; }
+        public int Sides { get; private set; }
+
+        private Random random = new Random();
+        public int GetRollResult()
         {
-            get { return rolls; }
-            set { rolls = value; }
+            return Enumerable.Range(1, Rolls).Sum(r => random.Next(1, Sides + 1));
         }
 
-        public int Sides
+        public override string ToString()
         {
-            get { return sides; }
-            set { sides = value; }
+            return $"{Rolls}d{Sides}";
         }
     } //end Dice
 } //end namespace Entity

@@ -81,6 +81,8 @@ namespace Mazegame.Control
                 if (commandName == "quit") break;
 
                 gameClient.PlayerMessage(dispatcher.Execute(gameContext, commandName, arguments.FirstOrDefault()));
+
+                if (gameContext.Player.LifePoints <= 0) break;
             }
 
             gameClient.PlayerMessage("Game over!");

@@ -6,34 +6,13 @@
 //  Original author: Gsimmons
 ///////////////////////////////////////////////////////////
 
-
-using System;
-
 namespace Mazegame.Entity
 {
     public class Item
     {
-        private int worth;
-        private int weight;
-        private String description;
-
-        public int Worth
-        {
-            get { return worth; }
-            set { worth = value; }
-        }
-
-        public int Weight
-        {
-            get { return weight; }
-            set { weight = value; }
-        }
-
-        public string Description
-        {
-            get { return description; }
-            set { description = value; }
-        }
+        public int Worth { get; set; }
+        public int Weight { get; set; }
+        public virtual string Description { get; set; }
 
         /// <summary>
         /// Equip player with item

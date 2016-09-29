@@ -8,6 +8,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Mazegame.Entity {
 	public class Location
@@ -16,7 +17,7 @@ namespace Mazegame.Entity {
 
 	    public Location(string description, string label)
 		{
-		    Description = description;
+            Description = description;
 		    Label = label;
             CollectableItems = new List<Item>();
 		}
@@ -26,12 +27,27 @@ namespace Mazegame.Entity {
 	        exits[exitLabel] = theExit;
 	    }
 
-		public string Description{ get; private set; }
+		public string Description { get; private set; }
 
-	    public string Label { get; private set; }
+        public string Label { get; private set; }
 
         public IReadOnlyDictionary<string, Exit> Exits { get { return exits; } }
 
         public List<Item> CollectableItems { get; set; }
+
+        public NonPlayerCharacter NPC { get; set; }
+
+        public string GetLongDescription()
+        {
+            return
+                Label + ": " + Description
+                + "\n" + GetExitsList()
+                + (CollectableItems.Any() ? "\nThere are some items you can collect" : "");
+        }
+
+        public string GetExitsList()
+        {
+            return string.Join("\n", Exits.Select(kv => kv.Key + ": " + kv.Value.Description));
+        }
     }
 }

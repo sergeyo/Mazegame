@@ -116,7 +116,12 @@ namespace MazegameTest
         {
             var context = GetContextWith3Locations();
             context.IsInCombatMode = true;
-            context.CurrentLocationEnemy = new NonPlayerCharacter("", 10, 10, 10, true);
+            context.CurrentLocationEnemy = new NonPlayerCharacter("", 10, 150, 10, true)
+            {
+                Weapon = new Weapon() {
+                    Dice = new Dice(2, 5)
+                }
+            };
 
             var command = new GotoCommand();
 
@@ -127,6 +132,9 @@ namespace MazegameTest
             Assert.IsFalse(response.Contains("location1_exit1description"));
             StringAssert.Contains(response, "You have spotted an enemy");
             StringAssert.Contains(response, context.CurrentLocationEnemy.Name);
+            StringAssert.Contains(response, "Dmg: 2d5+10");
+            StringAssert.Contains(response, "AC: 10");
+            StringAssert.Contains(response, "Life Points: 150");
         }
     }
 }

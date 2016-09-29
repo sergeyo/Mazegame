@@ -9,10 +9,19 @@
 namespace Mazegame.Entity {
 	public class Shield : Item {
 
-		public Shield(){
+		public Shield() {
         }
 
         public int Bonus { get; set; }
+
+        public override string Description {
+            get {
+                return base.Description + $" (AC +{Bonus})";
+            }
+            set {
+                base.Description = value;
+            }
+        }
 
         public override bool Equip(Player player)
         {

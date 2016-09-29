@@ -1,5 +1,6 @@
 ﻿using Mazegame.Commands.ItemCommands;
 using Mazegame.Control;
+using Mazegame.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,9 @@ namespace Mazegame.Commands
                 new GetItemCommand(),
                 new DropItemCommand(),
                 new PurchaseItemCommand(),
-                new SellItemCommand()
+                new SellItemCommand(),
+                new FightCommand(new Dice(1, 20)),
+                new RunawayCommand()
             };
 
             commands = availableCommands.ToDictionary(c => c.Name);

@@ -16,10 +16,11 @@ namespace Mazegame.Control
         {
             get
             {
-                return null;
+                var npc = Player.Location.NPC;
+                return npc.Hostile ? npc : null;
             }
         }
 
-        public bool IsInCombat() { return false; }
+        public bool IsInCombat() { return CurrentLocationEnemy != null; }
     }
 }

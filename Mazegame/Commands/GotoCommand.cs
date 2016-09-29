@@ -17,29 +17,32 @@ namespace Mazegame.Commands
         {
             if (string.IsNullOrWhiteSpace(argument))
             {
-                return "You should point an exit to go, choose one of the exits from this location:\n" + GetExitsList(context.Player.Location);
+                return "You should point an exit to go, choose one of the exits from this location:\n" 
+                    + context.Player.Location.GetExitsList();
             }
             if (!context.Player.Location.Exits.ContainsKey(argument))
             {
-                return "You pointed an unknown exit, choose one of the exits from this location:\n" + GetExitsList(context.Player.Location);
+                return "You pointed an unknown exit, choose one of the exits from this location:\n"
+                    + context.Player.Location.GetExitsList();
             }
 
             var exit = context.Player.Location.Exits[argument];
             context.Player.PreviousLocation = context.Player.Location;
             context.Player.Location = exit.Destination;
 
-            return "You now entered next location\n"
-                + context.Player.Location.Label + ": " + context.Player.Location.Description + "\n"
-                + (context.IsInCombat() 
-                  ? "You have spotted an enemy: " + context.CurrentLocationEnemy.Name + "! You can fight or runaway!"
-                  : GetExitsList(context.Player.Location));
-        }
+            if (context.IsInCombat())
+            {
+                var enemy = context.CurrentLocationEnemy;
+                return "You now entered next location\n"
+                    + context.Player.Location.Label + ": " + context.Player.Location.Description
+                    + "\nYou have spotted an enemy: " 
+                    + $"{enemy.Name} (Dmg: {enemy.Weapon.Dice.ToString()}+{enemy.Strength}, AC: {enemy.AC}, Life Points: {enemy.LifePoints}" 
+                    + "\n! You can fight or runaway!";
+            }
 
-        private string GetExitsList(Location location)
-        {
-            return string.Join("\n", location.Exits.Select(kv => kv.Key + ": " + kv.Value.Description));
+            return "You now entered next location\n" + context.Player.Location.GetLongDescription();
         }
-
+               
         public bool IsAvailableInContext(IGameContext context)
         {
             return !context.IsInCombat();

@@ -12,7 +12,6 @@ namespace Mazegame.Entity
 {
     public class Character
     {
-        public Dice Dice { get; set; }
         public Party Party { get; set; }
         public Item Item { get; set; }
         public Shield Shield { get; set; }
@@ -25,13 +24,22 @@ namespace Mazegame.Entity
             Agility = agility;
             LifePoints = lifePoints;
             Strength = strength;
+            Party = new Party();
         }
 
         public int Agility { get; private set; }
         public int LifePoints { get; private set; }
-        public String Name { get; private set; }
+        public string Name { get; private set; }
         public int Strength { get; private set; }
 
+        public int AC
+        {
+            get { return Agility + (Armor?.Bonus ?? 0) + (Shield?.Bonus ?? 0); }
+        }
 
-    } //end Character
-} //end namespace Entity
+        public void RecieveDamage(int damage)
+        {
+            LifePoints -= damage;
+        }
+    }
+}
