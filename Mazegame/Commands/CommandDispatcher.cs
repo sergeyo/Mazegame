@@ -19,7 +19,11 @@ namespace Mazegame.Commands
                 new GotoCommand(),
                 new ListItemsCommand(),
                 new EquipItemCommand(),
-                new UnequipItemCommand()
+                new UnequipItemCommand(),
+                new GetItemCommand(),
+                new DropItemCommand(),
+                new PurchaseItemCommand(),
+                new SellItemCommand()
             };
 
             commands = availableCommands.ToDictionary(c => c.Name);

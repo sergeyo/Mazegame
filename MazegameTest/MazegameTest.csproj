@@ -60,6 +60,7 @@
     <Compile Include="NonWearableItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PurchaseItemCommandTests.cs" />
+    <Compile Include="SellItemCommandTests.cs" />
     <Compile Include="UnequipItemCommandTests.cs" />
   </ItemGroup>
   <ItemGroup>

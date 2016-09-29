@@ -57,7 +57,7 @@ namespace MazegameTest
         {
             var context = new GameContextStub
             {
-                Player = new Player("", 1, 1, 1) { Location = new Location("shopDescription", "shop") }
+                Player = new Player("", 1, 1, 1) { Location = new Location("room", "room") }
             };
             var command = new PurchaseItemCommand();
 
@@ -130,7 +130,7 @@ namespace MazegameTest
         }
 
         [TestMethod]
-        public void PurchaseItemExecute_WhenHasNoMoney_ShouldReturnErrorMessage()
+        public void PurchaseItemExecute_WhenHasNotEnoughMoney_ShouldReturnErrorMessage()
         {
             var context = CreateGameContext();
             var command = new PurchaseItemCommand();
