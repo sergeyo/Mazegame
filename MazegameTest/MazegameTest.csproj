@@ -65,6 +65,7 @@
     <Compile Include="RunawayCommandTests.cs" />
     <Compile Include="SellItemCommandTests.cs" />
     <Compile Include="UnequipItemCommandTests.cs" />
+    <Compile Include="UseItemCommandTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Mazegame\Mazegame.csproj">

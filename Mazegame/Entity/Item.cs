@@ -23,5 +23,10 @@ namespace Mazegame.Entity
         {
             return false;
         }
+
+        public virtual string UseItem(Player player)
+        {
+            return "You can't use this Item";
+        }
     } //end Item
 } //end namespace Entity

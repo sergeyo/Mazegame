@@ -12,6 +12,8 @@ namespace Mazegame.Entity
 {
     public class Character
     {
+        private int _maxLifePoints;
+
         public Party Party { get; set; }
         public Item Item { get; set; }
         public Shield Shield { get; set; }
@@ -23,6 +25,7 @@ namespace Mazegame.Entity
             Name = name;
             Agility = agility;
             LifePoints = lifePoints;
+            _maxLifePoints = lifePoints;
             Strength = strength;
             Party = new Party();
         }
@@ -40,6 +43,15 @@ namespace Mazegame.Entity
         public void RecieveDamage(int damage)
         {
             LifePoints -= damage;
+        }
+
+        public void Heal(int lifePoints)
+        {
+            LifePoints += lifePoints;
+            if (LifePoints > _maxLifePoints)
+            {
+                LifePoints = _maxLifePoints;
+            }
         }
     }
 }

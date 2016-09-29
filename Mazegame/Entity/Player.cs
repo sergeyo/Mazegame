@@ -82,6 +82,11 @@ namespace Mazegame.Entity {
 
         public void AddItemToBackpack(Item item)
         {
+            if (item is Gold)
+            {
+                Gold += ((Gold)item).CoinsCount;
+                return;
+            }
             Backpack.Add(item);
         }
     }
