@@ -37,7 +37,7 @@ namespace Mazegame.Control
         {
             String playerName = gameClient.GetReply("What name do you choose to be known by?");
 
-            var player = new Player(playerName, 10, 20, 10) { Location = gameData.GetStartingLocation() };
+            var player = new Player(playerName, 10, 20, 10) { Location = gameData.GetStartingLocation(), Gold = 100 };
 
             gameContext = new GameContext(player);
         }

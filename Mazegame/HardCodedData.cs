@@ -9,6 +9,7 @@
 using System;
 using Mazegame.Boundary;
 using Mazegame.Entity;
+using System.Collections.Generic;
 
 namespace Mazegame
 {
@@ -40,7 +41,21 @@ namespace Mazegame
                 new Location("an open space containing comfortable looking couches and artwork of dubious quality",
                     "Airport Lounge");
             Location t127 = new Location("a lecture theatre", "T127");
-            Location gregsoffice = new Location("a spinning vortex of terror", "Greg's Office");
+            Location gregsoffice = new Location("a spinning vortex of terror", "Greg's Office")
+            {
+                CollectableItems = new List<Item>()
+                {
+                    new Weapon() { Description = "Big sword", Weight = 5, Worth = 100 },
+                    new Item() {Description = "Golden ring", Weight = 1, Worth = 300 }
+                }
+            };
+            Shop shop = new Shop("a big shop", "Shop") {
+                Store = new List<Item>()
+                {
+                    new Armor() {Description = "Leather armor", Bonus = 5, Weight = 10, Worth = 190 },
+                    new Shield() {Description = "A small shield", Bonus = 5, Weight = 4, Worth = 60 }
+                }
+            };
 
             startUp.AddExit("south", new Exit("you see an open space to the south", lounge));
             lounge.AddExit("north", new Exit("you see a mound of paper to the north", startUp));
@@ -53,6 +68,9 @@ namespace Mazegame
 
             lounge.AddExit("northwest", new Exit("you see a terrifying office to the northwest", gregsoffice));
             gregsoffice.AddExit("southeast", new Exit("you see an open space to the southeast", lounge));
+
+            startUp.AddExit("east", new Exit("you see a shop to the east", shop));
+            shop.AddExit("west", new Exit("you see a shop to the east", shop));
         }
     } //end HardCodedData
 } //end namespace Mazegame
