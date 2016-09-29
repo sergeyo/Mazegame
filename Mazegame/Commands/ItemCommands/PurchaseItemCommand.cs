@@ -38,7 +38,7 @@ namespace Mazegame.Commands.ItemCommands
                      + $"\nYou have {context.Player.Gold} gold";
             }
 
-            if (itemNumber < 0 || itemNumber > store.Count)
+            if (itemNumber < 0 || itemNumber > store.Count - 1)
             {
                 return "You should specify correct item number to purchase:\n"
                     + store.GetItemsIndexedListWithWorths()

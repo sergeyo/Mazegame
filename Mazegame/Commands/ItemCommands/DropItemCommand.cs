@@ -35,7 +35,7 @@ namespace Mazegame.Commands.ItemCommands
                     + backpack.GetItemsIndexedList();
             }
 
-            if (itemNumber < 0 || itemNumber > backpack.Count)
+            if (itemNumber < 0 || itemNumber > backpack.Count - 1)
             {
                 return "You should specify correct item number to drop:\n"
                     + backpack.GetItemsIndexedList();

@@ -35,7 +35,7 @@ namespace Mazegame.Commands.ItemCommands
                     + backpack.GetItemsIndexedListWithWorths();
             }
 
-            if (itemNumber < 0 || itemNumber > backpack.Count)
+            if (itemNumber < 0 || itemNumber > backpack.Count - 1)
             {
                 return "You should specify correct item number to sell:\n"
                     + backpack.GetItemsIndexedListWithWorths();

@@ -70,7 +70,7 @@ namespace Mazegame
             gregsoffice.AddExit("southeast", new Exit("you see an open space to the southeast", lounge));
 
             startUp.AddExit("east", new Exit("you see a shop to the east", shop));
-            shop.AddExit("west", new Exit("you see a shop to the east", shop));
+            shop.AddExit("west", new Exit("you see a shop to the east", startUp));
         }
     } //end HardCodedData
 } //end namespace Mazegame

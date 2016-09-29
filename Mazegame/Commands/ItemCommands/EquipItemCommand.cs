@@ -28,7 +28,7 @@ namespace Mazegame.Commands.ItemCommands
                 return "You should specify correct item number to equip:\n" + backpack.GetItemsIndexedList();
             }
 
-            if (itemNumber < 0 || itemNumber > backpack.Count) {
+            if (itemNumber < 0 || itemNumber > backpack.Count - 1) {
                 return "You should specify correct item number to equip:\n" + backpack.GetItemsIndexedList();
             }
 

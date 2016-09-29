@@ -35,7 +35,7 @@ namespace Mazegame.Commands.ItemCommands
                     + collectableItems.GetItemsIndexedListWithWeights();
             }
 
-            if (itemNumber < 0 || itemNumber > collectableItems.Count)
+            if (itemNumber < 0 || itemNumber > collectableItems.Count - 1)
             {
                 return "You should specify correct item number to collect:\n" 
                     + collectableItems.GetItemsIndexedListWithWeights();
