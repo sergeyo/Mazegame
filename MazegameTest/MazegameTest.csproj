@@ -51,12 +51,14 @@
   </Choose>
   <ItemGroup>
     <Compile Include="DiceTests.cs" />
+    <Compile Include="DisbandCommandTests.cs" />
     <Compile Include="DropItemCommandTests.cs" />
     <Compile Include="EquipItemTests.cs" />
     <Compile Include="FightCommandTests.cs" />
     <Compile Include="GameContextStub.cs" />
     <Compile Include="GetItemCommandTests.cs" />
     <Compile Include="GotoCommandTests.cs" />
+    <Compile Include="GroupCommandTests.cs" />
     <Compile Include="HelpCommandTests.cs" />
     <Compile Include="ListItemsCommandTests.cs" />
     <Compile Include="NonWearableItem.cs" />

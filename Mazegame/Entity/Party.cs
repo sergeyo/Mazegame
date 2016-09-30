@@ -12,18 +12,12 @@ namespace Mazegame.Entity
 {
     public class Party
     {
-        private Boolean moveable;
-        public Mazegame.Entity.Location m_Location;
-        public Mazegame.Entity.Character m_Character;
+        public NonPlayerCharacter Character { get; set; }
 
         public Party()
         {
         }
 
-        public Boolean Moveable
-        {
-            get { return moveable; }
-            set { moveable = value; }
-        }
+        public Boolean Moveable { get; set; }
     } //end Party
 } //end namespace Entity

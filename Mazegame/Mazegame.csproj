@@ -44,8 +44,10 @@
     <Compile Include="Boundary\IMazeClient.cs" />
     <Compile Include="Boundary\IMazeData.cs" />
     <Compile Include="Commands\CommandDispatcher.cs" />
+    <Compile Include="Commands\DisbandCommand.cs" />
     <Compile Include="Commands\FightCommand.cs" />
     <Compile Include="Commands\GotoCommand.cs" />
+    <Compile Include="Commands\GroupCommand.cs" />
     <Compile Include="Commands\HelpCommand.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\ICommandInformationProvider.cs" />

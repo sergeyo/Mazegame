@@ -26,7 +26,9 @@ namespace Mazegame.Commands
                 new PurchaseItemCommand(),
                 new SellItemCommand(),
                 new FightCommand(new Dice(1, 20)),
-                new RunawayCommand()
+                new RunawayCommand(),
+                new GroupCommand(),
+                new DisbandCommand()
             };
 
             commands = availableCommands.ToDictionary(c => c.Name);
