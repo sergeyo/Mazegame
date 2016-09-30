@@ -29,48 +29,107 @@ namespace Mazegame
 
         public String GetWelcomeMessage()
         {
-            return "Welcome to the Mount Helanous";
+            return "Welcome to the King's maze";
         }
 
         private void createLocations()
         {
-            startUp =
-                new Location("an office with paper strewn everywhere, how anyone works effectively here is a mystery",
-                    "Julies Office");
-            Location lounge =
-                new Location("an open space containing comfortable looking couches and artwork of dubious quality",
-                    "Airport Lounge");
-            Location t127 = new Location("a lecture theatre", "T127");
-            Location gregsoffice = new Location("a spinning vortex of terror", "Greg's Office")
+            var woodShield = new Shield() { Bonus = 2, Description = "Wood shield", Weight = 4, Worth = 30 };
+            var spear = new Weapon() { Dice = new Dice(3, 4), Description = "Spear", Weight = 3, Worth = 50 };
+            var steelSword = new Weapon() { Dice = new Dice(4, 7), Description = "Steel sword", Weight = 3, Worth = 400 };
+            var steelShield = new Shield() { Bonus = 5, Description = "Steel shield", Weight = 4, Worth = 200 };
+            var steelPlate = new Armor() { Bonus = 10, Description = "Steel plate", Weight = 7, Worth = 800 };
+
+            var rat = new NonPlayerCharacter("Rat", 3, 25, 2, true) {
+                Weapon = CreateWeapon(1, 3)
+            };
+            var dwarf = new NonPlayerCharacter("Dwarf", 6, 50, 6, true)
             {
-                CollectableItems = new List<Item>()
-                {
-                    new Weapon() { Description = "Big sword", Weight = 5, Worth = 100 },
-                    new Item() {Description = "Golden ring", Weight = 1, Worth = 300 }
-                }
+                Weapon = CreateWeapon(1, 5)
             };
-            Shop shop = new Shop("a big shop", "Shop") {
-                Store = new List<Item>()
-                {
-                    new Armor() {Description = "Leather armor", Bonus = 5, Weight = 10, Worth = 190 },
-                    new Shield() {Description = "A small shield", Bonus = 5, Weight = 4, Worth = 60 }
-                }
+            var orc = new NonPlayerCharacter("Orc", 10, 70, 10, true)
+            {
+                Weapon = CreateWeapon(2, 4)
+            };
+            var troll = new NonPlayerCharacter("Troll", 12, 100, 15, true)
+            {
+                Weapon = CreateWeapon(3, 6)
+            };
+            var knight = new NonPlayerCharacter("Knight", 25, 100, 15, false)
+            {
+                Weapon = CreateWeapon(4, 6)
             };
 
-            startUp.AddExit("south", new Exit("you see an open space to the south", lounge));
-            lounge.AddExit("north", new Exit("you see a mound of paper to the north", startUp));
+            startUp = new Location("an entrance to the maze", "Entrance");
+            var shop = new Shop("a big shop where you can purchase some equipment and sell some stuff", "Shop")
+            {
+                Store = new List<Item> { steelSword, steelShield, steelPlate }
+            };
+            var garden = new Location("a large garden with tracks, bushes, trees and fountains", "Garden")
+            {
+                CollectableItems = new List<Item> { woodShield, CreateGold(100) }
+            };
+            var hall = new Location("a large room with a huge chandelier", "Hall");
+            var outpost = new Location("a well guarded outpost", "Outpost") {
+                NPC = dwarf
+            };
+            var treasury = new Location("a king's treasury where all well stored", "Treasury")
+            {
+                CollectableItems = new List<Item> { CreateGold(1000), CreateHealthPotion(), CreateHealthPotion() }
+            };
+            var warehouse = new Location("a dark storage with shelves", "Warehouse") {
+                CollectableItems = new List<Item> { CreateGold(200), spear, CreateHealthPotion() },
+                NPC = rat
+            };
+            var bigRoom = new Location("a big room with royal family portraits on wall", "Big room");
+            var prison = new Location("a first floow of prison with guard room", "Prison")
+            {
+                NPC = orc
+            };
+            var cell = new Location("a little prison cell", "Prison cell")
+            {
+                NPC = knight
+            };
+            var appartments = new Location("Incredibly beautiful, bright room with a royal throne", "Royal appartments")
+            {
+                NPC = troll
+            };
 
-            startUp.AddExit("west", new Exit("you see a terrifying office to the west", gregsoffice));
-            gregsoffice.AddExit("east", new Exit("you see a mound of paper to the east", startUp));
+            AddExit(startUp, shop, "north", "way to Shop", "south", "way to Entrance");
+            AddExit(startUp, garden, "south", "exit to Garden", "north", "back to Entrance");
+            AddExit(startUp, hall, "east", "two-sided door to a big Hall", "west", "two-sided door back to Entrance");
 
-            t127.AddExit("south", new Exit("you see a mound of paper to the south", startUp));
-            startUp.AddExit("north", new Exit("you see a bleak place to the north", t127));
+            AddExit(hall, outpost, "north", "door with metal shields", "south", "door to a big Hall");
+            AddExit(outpost, treasury, "north", "passage with a strong door at the end", "south", "way back to Outpost");
+            AddExit(hall, warehouse, "south", "wooden door to Warehouse", "north", "a wooden door back to a big Hall");
+            AddExit(hall, bigRoom, "east", "a gateway to a very Big room", "west", "gateway back to Hall");
 
-            lounge.AddExit("northwest", new Exit("you see a terrifying office to the northwest", gregsoffice));
-            gregsoffice.AddExit("southeast", new Exit("you see an open space to the southeast", lounge));
+            AddExit(bigRoom, prison, "south", "opened lattice, looks like a Prison entrance", "north", "back to Big room!");
+            AddExit(prison, cell, "upstairs", "upstairs to prison cells floor", "downstairs", "back to Prison entrance");
+            AddExit(bigRoom, appartments, "east", "a portal with the royal chambers, rising above him", "west", "a portal way to a Big room");
 
-            startUp.AddExit("east", new Exit("you see a shop to the east", shop));
-            shop.AddExit("west", new Exit("you see  mound of paper to the east", startUp));
+            startUp.AddExit("south", new Exit("exit to Garden", garden));
+        }
+
+        private static Gold CreateGold(int coinsCount)
+        {
+            return new Gold() { Description = "Gold", CoinsCount = coinsCount, Weight = 0 };
+        }
+
+        private static HealthPotion CreateHealthPotion()
+        {
+            return new HealthPotion() { Description = "HealthPotion", Weight = 1, Worth = 20 };
+        }
+
+        private static Weapon CreateWeapon(int rolls, int sides)
+        {
+            return new Weapon {Dice = new Dice(rolls, sides) };
+        }
+
+        private static void AddExit(Location location, Location target, string exitName, string desc, string backExit, string backDescription)
+        {
+            location.AddExit(exitName, new Exit(desc, target));
+            target.AddExit(backExit, new Exit(backDescription, location));
         }
     } //end HardCodedData
 } //end namespace Mazegame

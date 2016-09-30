@@ -69,7 +69,8 @@ namespace MazegameTest
 
             var response = command.Execute(context, null);
 
-            StringAssert.Contains(response, "Here is your backpack content (weight: 1/20)");
+            StringAssert.Contains(response, "weight is 1 / 20");
+            StringAssert.Contains(response, "Here is your backpack content");
             StringAssert.Contains(response, weapon.Description + " (weight 1)");
             Assert.IsFalse(response.Contains(armor.Description));
             Assert.IsFalse(response.Contains(shield.Description));
@@ -84,8 +85,9 @@ namespace MazegameTest
 
             var response = command.Execute(context, null);
 
+            StringAssert.Contains(response, "weight is 11 / 20");
             StringAssert.Contains(response, "You have no equipped items.");
-            StringAssert.Contains(response, "Here is your backpack content (weight: 11/20)");
+            StringAssert.Contains(response, "Here is your backpack content");
             StringAssert.Contains(response, weapon.Description + " (weight 1)");
             StringAssert.Contains(response, armor.Description + " (weight 2)");
             StringAssert.Contains(response, shield.Description + " (weight 3)");
@@ -103,10 +105,11 @@ namespace MazegameTest
 
             var response = command.Execute(context, null);
 
+            StringAssert.Contains(response, "weight is 18 / 20");
             StringAssert.Contains(response, "You are equipped with:");
             StringAssert.Contains(response, shield.Description + " (weight 3)");
             StringAssert.Contains(response, context.Player.Armor.Description + " (weight 7)");
-            StringAssert.Contains(response, "Here is your backpack content (weight: 18/20)"); // 1+2+5 in backpack + 3 shield + 7 armor
+            StringAssert.Contains(response, "Here is your backpack content"); // 1+2+5 in backpack + 3 shield + 7 armor
             StringAssert.Contains(response, weapon.Description + " (weight 1)");
             StringAssert.Contains(response, armor.Description + " (weight 2)");
             StringAssert.Contains(response, item.Description + " (weight 5)");

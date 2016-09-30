@@ -19,6 +19,8 @@ namespace Mazegame.Commands.ItemCommands
 
             var player = context.Player;
 
+            sb.AppendLine($"Your weight is {player.GetCurrentWeight()} / {player.MaxWeight}");
+
             var equippedItems = new Item[] {
                     player.Weapon,
                     player.Armor,
@@ -35,11 +37,8 @@ namespace Mazegame.Commands.ItemCommands
 
             if (context.Player.Backpack.Any())
             {
-                sb.AppendLine(string.Format("Here is your backpack content (weight: {0}/{1}):\n{2}",
-                    player.GetCurrentWeight(),
-                    player.MaxWeight,
-                    sb.AppendLine(context.Player.Backpack.GetItemsListWithWeights())
-                ));
+                sb.AppendLine("Here is your backpack content");
+                sb.AppendLine(context.Player.Backpack.GetItemsListWithWeights());
             }
             else
             {

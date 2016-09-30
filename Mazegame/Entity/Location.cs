@@ -40,9 +40,10 @@ namespace Mazegame.Entity {
         public string GetLongDescription()
         {
             return
-                Label + ": " + Description
-                + "\n" + GetExitsList()
-                + (CollectableItems.Any() ? "\nThere are some items you can collect" : "");
+                "    " + Label + " - " + Description
+                + "\nThere are some exits from this location:\n" + GetExitsList()
+                + (CollectableItems.Any() ? "\nThere are some items you can collect (use getItem command)" : "")
+                + (NPC != null ? $"\nYou see some friendly person, {NPC.Name}. You may group with him to continue your journey together" : "");
         }
 
         public string GetExitsList()

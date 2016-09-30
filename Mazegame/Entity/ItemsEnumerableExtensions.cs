@@ -10,22 +10,22 @@ namespace Mazegame.Entity
     {
         public static string GetItemsIndexedList(this IEnumerable<Item> items)
         {
-            return string.Join("\n", items.Select((item, index) => $"{index}: {item.Description}"));
+            return string.Join("\n", items.Select((item, index) => $"    {index}: {item.Description}"));
         }
 
         public static string GetItemsListWithWeights(this IEnumerable<Item> items)
         {
-            return string.Join("\n", items.Select(item => $"{item.Description} (weight {item.Weight})"));
+            return string.Join("\n", items.Select(item => $"    {item.Description} (weight {item.Weight})"));
         }
 
         public static string GetItemsIndexedListWithWeights(this IEnumerable<Item> items)
         {
-            return string.Join("\n", items.Select((item, index) => $"{index}: {item.Description} (weight {item.Weight})"));
+            return string.Join("\n", items.Select((item, index) => $"    {index}: {item.Description} (weight {item.Weight})"));
         }
 
         public static string GetItemsIndexedListWithWorths(this IEnumerable<Item> items)
         {
-            return string.Join("\n", items.Select((item, index) => $"{index}: {item.Description} (worth {item.Worth})"));
+            return string.Join("\n", items.Select((item, index) => $"    {index}: {item.Description} (worth {item.Worth})"));
         }
     }
 }

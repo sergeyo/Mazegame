@@ -35,9 +35,15 @@ namespace Mazegame.Control
 
         public void SetupPlayer()
         {
-            String playerName = gameClient.GetReply("What name do you choose to be known by?");
+            string playerName = gameClient.GetReply("What name do you choose to be known by?");
 
-            var player = new Player(playerName, 10, 20, 10) { Location = gameData.GetStartingLocation(), Gold = 100 };
+            var player = new Player(playerName, 10, 100, 10)
+            {
+                Location = gameData.GetStartingLocation(),
+                Gold = 100,
+                Weapon = new Weapon() { Description = "Dagger", Dice = new Dice(2, 3), Weight = 3, Worth = 40},
+                Armor = new Armor() { Description = "Leather armor", Bonus = 5, Weight = 5, Worth = 50}
+            };
 
             gameContext = new GameContext(player);
         }
@@ -50,7 +56,7 @@ namespace Mazegame.Control
             gameClient.PlayerMessage("Let the story begins!");
             gameClient.PlayerMessage("Welcome " + gameContext.Player.Name + "!\n");
 
-            gameClient.PlayerMessage("You find yourself looking at " + gameData.GetStartingLocation().Description);
+            gameClient.PlayerMessage("You find yourself looking at " + gameData.GetStartingLocation().GetLongDescription());
 
             gameClient.PlayerMessage("You can use 'help' to see all available commands");
             gameClient.PlayerMessage("You can use 'help <command>' to see command description");
@@ -87,6 +93,7 @@ namespace Mazegame.Control
 
             gameClient.PlayerMessage("Game over!");
             gameClient.PlayerMessage("Good bye!");
+            gameClient.GetReply("(press enter to leave the game)");
         }
     } //end DungeonMaster
 } //end namespace Control

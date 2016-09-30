@@ -59,11 +59,20 @@ namespace Mazegame.Commands
             {
                 sb.AppendLine("You died");
             }
-            if (context.Player.Party.Character?.LifePoints <= 0)
+            if (context.Player.Party.Character != null)
             {
-                sb.AppendLine($"{context.Player.Party.Character.Name} died");
-                context.Player.Party.Character = null;
+                if (context.Player.Party.Character.LifePoints <= 0)
+                {
+                    sb.AppendLine($"{context.Player.Party.Character.Name} died");
+                    context.Player.Party.Character = null;
+                }
+                else
+                {
+                    sb.AppendLine($"{context.Player.Party.Character} has {context.Player.Party.Character.LifePoints} life points left");
+                }
             }
+
+            sb.AppendLine($"You have {context.Player.LifePoints} life points left");
 
             return sb.ToString();
         }

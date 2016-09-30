@@ -17,7 +17,7 @@ namespace Mazegame.Control
             get
             {
                 var npc = Player.Location.NPC;
-                return npc.Hostile ? npc : null;
+                return npc != null && npc.Hostile ? npc : null;
             }
         }
 

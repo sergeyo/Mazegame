@@ -25,6 +25,7 @@ namespace Mazegame.Commands
                 new DropItemCommand(),
                 new PurchaseItemCommand(),
                 new SellItemCommand(),
+                new UseItemCommand(),
                 new FightCommand(new Dice(1, 20)),
                 new RunawayCommand(),
                 new GroupCommand(),

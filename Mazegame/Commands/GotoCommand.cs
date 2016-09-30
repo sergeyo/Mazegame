@@ -36,7 +36,7 @@ namespace Mazegame.Commands
                 return "You now entered next location\n"
                     + context.Player.Location.Label + ": " + context.Player.Location.Description
                     + "\nYou have spotted an enemy: " 
-                    + $"{enemy.Name} (Dmg: {enemy.Weapon.Dice.ToString()}+{enemy.Strength}, AC: {enemy.AC}, Life Points: {enemy.LifePoints}" 
+                    + $"{enemy.Name} (Dmg: {enemy.Weapon.Dice.ToString()}+{enemy.Strength}, AC: {enemy.AC}, Life Points: {enemy.LifePoints})" 
                     + "\n! You can fight or runaway!";
             }
 

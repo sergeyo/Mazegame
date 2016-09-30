@@ -48,7 +48,7 @@ namespace Mazegame.Commands.ItemCommands
 
             context.Player.Gold += item.Worth;
 
-            return "You sold " + item.Description;
+            return $"You sold {item.Description}, now you have {context.Player.Gold} gold";
         }
 
         public bool IsAvailableInContext(IGameContext context)
