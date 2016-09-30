@@ -33,6 +33,11 @@ namespace Mazegame.Commands
 
             sb.AppendLine(PerformAttack(context.Player, context.CurrentLocationEnemy));
 
+            if (context.Player.Party.Character != null && context.CurrentLocationEnemy.LifePoints > 0)
+            {
+                sb.AppendLine(PerformAttack(context.Player.Party.Character, context.CurrentLocationEnemy));
+            }
+
             if (context.CurrentLocationEnemy.LifePoints <= 0)
             {
                 sb.AppendLine("You just killed " + context.CurrentLocationEnemy.Name);
@@ -43,12 +48,21 @@ namespace Mazegame.Commands
                 sb.AppendLine(context.Player.Location.GetLongDescription());
             } else
             {
-                sb.AppendLine(PerformAttack(context.CurrentLocationEnemy, context.Player));
+                Character victim = context.Player.Party.Character;
+                sb.AppendLine(
+                    PerformAttack(
+                        context.CurrentLocationEnemy, 
+                        (Character)context.Player.Party.Character ?? context.Player));
             }
 
             if (context.Player.LifePoints <= 0)
             {
                 sb.AppendLine("You died");
+            }
+            if (context.Player.Party.Character?.LifePoints <= 0)
+            {
+                sb.AppendLine($"{context.Player.Party.Character.Name} died");
+                context.Player.Party.Character = null;
             }
 
             return sb.ToString();
